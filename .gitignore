@@ -1,0 +1,7 @@
+# yolov8 directories
+datasets/
+runs/
+
+# Ignore all .pt files except in the models directory
+*.pt
+!/models/*.pt
