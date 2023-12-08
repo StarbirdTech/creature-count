@@ -1,3 +1,5 @@
+.env
+
 # yolov8 directories
 datasets/
 runs/
