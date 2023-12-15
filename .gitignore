@@ -6,6 +6,8 @@ runs/
 *.pt
 !/models/*.pt
 
+# the following is from github/gitignore/python (https://github.com/github/gitignore/blob/main/Python.gitignore)
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
