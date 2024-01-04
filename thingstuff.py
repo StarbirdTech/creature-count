@@ -2,6 +2,12 @@ import cv2
 from ultralytics import YOLO
 from ipSearch import get_ip
 
+# Define an array of values to exclude
+dontdetectthesebirds = [24, 41]
+
+# Create a zero-indexed array with 200 elements excluding the specified values
+detectthesebirds = [i for i in range(200) if i not in dontdetectthesebirds]
+
 # Load the YOLOv8 model
 model = YOLO("yolov8l-custom-birds-300.pt")
 
@@ -11,12 +17,15 @@ video2 = "https://scontent.cdninstagram.com/v/t66.30100-16/10000000_304046049161
 video3 = "https://scontent.cdninstagram.com/v/t50.2886-16/402149600_2636455536503812_6857444293256843050_n.mp4?_nc_ht=scontent.cdninstagram.com&_nc_cat=104&_nc_ohc=V3fYMYcqohkAX9b6QkJ&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfD5J9YaX8AAhjdtX34RCyzrYCf-1g8O252LP5bfQUJ8vA&oe=657D051C&_nc_sid=10d13b"
 video4 = "https://scontent.cdninstagram.com/v/t50.2886-16/404729560_259326877123898_6038490422009591577_n.mp4?_nc_ht=scontent.cdninstagram.com&_nc_cat=102&_nc_ohc=qiv5ddeo8bgAX_cgKjQ&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAg-Qjj1vfhpfOI96dDmHIeXJ8uIWzMA4VBxpKyqBocpw&oe=657CE4A2&_nc_sid=10d13b"
 
+demo1 = "https://youtu.be/bA5svFpasQ4?si=emoxZ8E31g_5-lrr"
+demo2 = "https://www.youtube.com/watch?v=vu72ja_mGME"
+
 # target_device_name = "esp32-cam"
 # ip_address = f"http://{get_ip(target_device_name)}:81/"
 
 # print("Found {} at {}".format(target_device_name, ip_address))
 
-cap = cv2.VideoCapture(video2)
+cap = cv2.VideoCapture("demo.mp4")
 
 # Loop through the video frames
 while cap.isOpened():
@@ -25,11 +34,9 @@ while cap.isOpened():
 
     if success:
         # Run YOLOv8 inference on the frame
-        results = model(frame)
-
+        results = model.predict(frame, classes=[24, 41])
         # Visualize the results on the frame
         annotated_frame = results[0].plot()
-
         # Display the annotated frame
         cv2.imshow("YOLOv8 Inference", annotated_frame)
 
