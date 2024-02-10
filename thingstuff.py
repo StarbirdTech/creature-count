@@ -25,7 +25,7 @@ demo2 = "https://www.youtube.com/watch?v=vu72ja_mGME"
 
 # print("Found {} at {}".format(target_device_name, ip_address))
 
-cap = cv2.VideoCapture("demo.mp4")
+cap = cv2.VideoCapture(0)
 
 # Loop through the video frames
 while cap.isOpened():
